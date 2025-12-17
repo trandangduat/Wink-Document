@@ -281,8 +281,10 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 2. Hệ thống tạo tài khoản và chuyển vào trang Onboarding để thiết lập hồ sơ. \\
 \hline
 \textbf{Luồng ngoại lệ} & 
-- Email đã tồn tại: Hệ thống báo lỗi và yêu cầu đăng nhập. \newline
-- Nhập lại mật khẩu không khớp: Yêu cầu kiểm tra lại. \\
+- Email đã tồn tại hoặc không đúng form: Hệ thống báo lỗi và yêu cầu đăng nhập. \newline
+- Nhập lại mật khẩu không khớp: Yêu cầu kiểm tra lại. \newline
+- Mật khẩu không đủ mạnh: Báo lỗi đăng ký \newline
+- Tên hiển thị đã được sử dụng: Báo lỗi và yêu cầu dùng tên khác\\
 \hline
 \textbf{Hậu điều kiện} & Tài khoản mới được tạo và lưu trong cơ sở dữ liệu. \\
 \hline
@@ -411,20 +413,20 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 % ==================================================================
 \begin{longtable}{|p{3.5cm}|p{11.5cm}|}
 \hline
-\textbf{UC-06} & \textbf{Tương tác bài viết (Like/Comment)} \\
+\textbf{UC-06} & \textbf{Tương tác bài viết (Like/Comment/Repost)} \\
 \hline
-\textbf{Mô tả} & Người dùng thể hiện cảm xúc (Tim) hoặc bình luận vào bài viết của người khác. \\
+\textbf{Mô tả} & Người dùng thể hiện cảm xúc (Tim) hoặc bình luận vào bài viết của người khác hoặc icon Repost để đăng lại \\
 \hline
 \textbf{Tác nhân} & Người dùng. \\
 \hline
 \textbf{Tiền điều kiện} & Đang xem bài viết trên Newsfeed hoặc xem chi tiết. \\
 \hline
-\textbf{Sự kiện kích hoạt} & Nhấn vào icon Trái tim hoặc icon Bình luận. \\
+\textbf{Sự kiện kích hoạt} & Nhấn vào icon Trái tim hoặc icon Bình luận hoặc icon Repost. \\
 \hline
 \textbf{Luồng cơ bản} & 
 1. \textbf{Trường hợp Like:} Người dùng nhấn icon Trái tim. Hệ thống đổi màu icon sang đỏ, tăng bộ đếm Like lên 1. \newline
 2. \textbf{Trường hợp Comment:} Người dùng nhấn icon Bình luận, nhập nội dung và nhấn Gửi. Hệ thống hiển thị bình luận mới ngay lập tức. \newline
-3. Hệ thống gửi thông báo (Notification) đến chủ nhân bài viết. \\
+3. \textbf{Trường hợp repost:} Người dùng nhấn icon Repost, newfeeds sẽ hiển thị bài đăng lại và bài đăng đó sẽ gắn thêm tag để biết được đã đăng lại của account nào. Đồng thời lưu bài viết được lưu vào cơ sở dữ liệu như một bài post\\
 \hline
 \textbf{Luồng ngoại lệ} & 
 - Bỏ Like (Unlike): Nhấn lại vào icon Trái tim đang đỏ, hệ thống giảm bộ đếm Like đi 1. \\
@@ -499,9 +501,9 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 \hline
 \textbf{Luồng cơ bản} & 
 1. Hệ thống mở giao diện chat Real-time. \newline
-2. Người dùng nhập tin nhắn, gửi ảnh/sticker. \newline
-3. Hệ thống chuyển tin nhắn đến người nhận ngay lập tức (thông qua Socket). \newline
-4. Hệ thống hiển thị trạng thái ``Đã xem'' khi người nhận mở tin nhắn. \\
+2. Người dùng nhập tin nhắn, gửi ảnh. \newline
+3. Hệ thống chuyển tin nhắn đến người nhận ngay lập tức (thông qua Socket). Phía bên kia 
+nhận được thông báo khi có tin nhắn tới, chatList hiển thị các đoạn tin nhắn, và in đậm các tin nhắn chưa được đọc \\
 \hline
 \textbf{Hậu điều kiện} & Nội dung hội thoại được lưu trữ. \\
 \hline
@@ -545,7 +547,7 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 \hline
 \textbf{Tác nhân} & Người dùng. \\
 \hline
-\textbf{Tiền điều kiện} & Vào mục Explore -> Chọn ``Tình huống''. \\
+\textbf{Tiền điều kiện} & Vào mục Explore -> Chọn ``Quiz''. \\
 \hline
 \textbf{Luồng cơ bản} & 
 1. Hệ thống hiển thị bối cảnh (Ví dụ: Bạn quên ngày kỷ niệm). \newline
@@ -599,7 +601,7 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 1. Kiểm tra ngày đăng nhập cuối cùng. \newline
 2. Nếu là ngày liền kề: Tăng Streak +1. \newline
 3. Nếu ngắt quãng > 24h: Reset Streak về 1. \newline
-4. Hiển thị popup thông báo số ngày Streak và điểm thưởng nhận được. \\
+4. Hiển thị và cập nhật điểm thưởng nhận được. \\
 \hline
 \textbf{Hậu điều kiện} & Cập nhật số ngày Streak. \\
 \hline
@@ -654,17 +656,18 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 \hline
 \textbf{UC-16} & \textbf{Đổi Icon ứng dụng} \\
 \hline
-\textbf{Mô tả} & Cho phép người dùng thay đổi biểu tượng App trên màn hình chính điện thoại dựa trên cấp độ Streak. \\
+\textbf{Mô tả} & Cho phép người dùng thay đổi biểu tượng App trên màn hình chính điện thoại dựa trên icon mà 
+người đó chọn ở shop-icon. \\
 \hline
 \textbf{Tác nhân} & Người dùng. \\
 \hline
-\textbf{Tiền điều kiện} & Đạt đủ mốc Streak quy định (7 ngày, 30 ngày...). \\
+\textbf{Tiền điều kiện} & Đã mua các icon (7 ngày, 30 ngày...). \\
 \hline
 \textbf{Luồng cơ bản} & 
-1. Người dùng vào Profile -> Cài đặt -> Đổi Icon. \newline
+1. Người dùng vào Explore -> Shop -> Đổi Icon. \newline
 2. Hệ thống hiển thị danh sách Icon (Có khóa và Đã mở khóa). \newline
 3. Người dùng chọn Icon đã mở khóa. \newline
-4. Hệ thống thực hiện thay đổi Icon (sử dụng tính năng `activity-alias` của Android). \\
+4. Hệ thống thực hiện thay đổi Icon. \\
 \hline
 \textbf{Hậu điều kiện} & Icon ứng dụng trên màn hình Home thay đổi. \\
 \hline
@@ -708,11 +711,10 @@ Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng
 \hline
 \textbf{Luồng cơ bản} & 
 1. Người dùng chọn mục Bói tình yêu. \newline
-2. Hệ thống hiển thị bộ bài úp. \newline
-3. Người dùng chọn 1 lá bài. \newline
-4. Hệ thống lật bài và hiển thị lời giải thích (Meaning) về tình duyên trong ngày. \\
+2. Chọn tính năng giải trí. \newline
+4. Hệ thống thực hiện logic các trò chơi\\
 \hline
-\textbf{Hậu điều kiện} & Ghi nhận lượt xem trong ngày. \\
+\textbf{Hậu điều kiện} & Ghi nhận lượt xem trong ngày hoặc trừ điểm rizz. \\
 \hline
 \end{longtable}
 \clearpage
