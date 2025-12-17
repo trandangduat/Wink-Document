@@ -1,0 +1,1159 @@
+\documentclass{article} 
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc} % Font tiếng Việt
+\usepackage[fontsize=13pt]{scrextend} 
+\usepackage[paperheight=29.7cm,paperwidth=21cm,right=2cm,left=3cm,top=2cm,bottom=2.5cm]{geometry} 
+\usepackage{mathptmx} % Time New Roman
+\usepackage{graphicx} 
+\usepackage{float} 
+\usepackage{tikz} 
+\usepackage{longtable}
+\usetikzlibrary{calc} 
+\usepackage{indentfirst} 
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec} 
+
+% --- CẤU HÌNH GIÃN DÒNG & FONT ---
+\renewcommand{\baselinestretch}{1.2} 
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{1cm} 
+\setcounter{secnumdepth}{4}
+
+% --- CẤU HÌNH HEADING ---
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\titlespacing*{\section}{0pt}{0pt}{10pt} 
+\titleformat*{\section}{\fontsize{16pt}{0pt}\selectfont\bfseries}
+
+\titlespacing*{\subsection}{0pt}{10pt}{0pt} 
+\titleformat*{\subsection}{\fontsize{14pt}{0pt}\selectfont\bfseries}
+
+\titlespacing*{\subsubsection}{0pt}{10pt}{0pt} 
+\titleformat*{\subsubsection}{\fontsize{13pt}{0pt}\selectfont\bfseries\itshape}
+
+% --- CẤU HÌNH TÊN HÌNH ẢNH ---
+\renewcommand{\figurename}{\fontsize{12pt}{0pt}\selectfont \bfseries Hình}
+% DÒNG DƯỚI ĐÂY ĐÃ BỊ XÓA (hoặc được comment bằng dấu %)
+% \renewcommand{\thefigure}{\thesection.\arabic{figure}} 
+\usepackage{caption}
+\captionsetup[figure]{labelsep=colon}
+% ================= BẮT ĐẦU VĂN BẢN =================
+\begin{document}
+
+% ---------------- TRANG BÌA ----------------
+\begin{titlepage}
+    \begin{tikzpicture}[overlay,remember picture]
+        \draw [line width=3pt]
+        ($(current page.north west) + (3.0cm,-2.0cm)$)
+        rectangle
+        ($(current page.south east) + (-2.0cm,2.5cm)$) ;
+        \draw [line width=0.5pt]
+        ($(current page.north west) + (3.1cm,-2.1cm)$)
+        rectangle
+        ($(current page.south east) + (-2.1cm,2.6cm)$) ;
+    \end{tikzpicture}
+
+    \begin{center}
+        \vspace{-9pt} TRƯỜNG ĐẠI HỌC CÔNG NGHỆ - ĐẠI HỌC QUỐC GIA HÀ NỘI \\
+        \textbf{\fontsize{16pt}{0pt}\selectfont KHOA CÔNG NGHỆ THÔNG TIN}
+        \vspace{0.5cm}
+
+        % Kiểm tra lại đường dẫn ảnh logo của bạn
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=3.53cm, height=3.6cm]{Images/logo_uet.jpg}
+        \end{figure}
+
+        \vspace{1cm}
+        \fontsize{20pt}{0pt}\selectfont BÀI TẬP LỚN MÔN HỌC\\
+        \vspace{7pt}
+        \textbf{\fontsize{24pt}{0pt}\selectfont PHÁT TRIỂN ỨNG DỤNG DI ĐỘNG}
+        \vspace{1.5cm}
+    \end{center}
+
+    \begin{center}
+        % Tên đề tài khớp với nội dung Cookbook
+        \textbf{\fontsize{20pt}{0pt}\selectfont ĐỀ TÀI: ỨNG DỤNG WINK} \\
+        \vspace{1.5cm}
+
+        % Dùng bảng để danh sách thành viên thẳng hàng đẹp mắt
+        \begin{table}[H]
+            \centering
+            \fontsize{14pt}{1.5}\selectfont
+            \begin{tabular}{ll}
+                \textbf{Giảng viên hướng dẫn:} & TS. Lê Khánh Trình             \\[15pt]
+                \textbf{Nhóm thực hiện:}       & Nhóm 8                         \\[6pt]
+                \textbf{Thành viên:}           & 1. Trần Tuấn Anh - 23020011    \\[6pt]
+                                               & 2. Trần Đăng Duật - 23020023   \\[6pt] % Nhớ sửa MSV
+                                               & 3. Nguyễn Đức Dương - 2302xxxx \\[6pt]
+                                               & 4. Nguyễn Anh Khang - 2302xxxx \\[6pt]
+                                               & 5. Hoàng Thành Đạt - 23021518
+            \end{tabular}
+        \end{table}
+
+        \vspace{2.25cm}
+        \fontsize{14pt}{0pt}\selectfont Hà Nội, \the\month-\the\year
+    \end{center}
+\end{titlepage}
+
+\cleardoublepage
+
+% ---------------- PHẦN MỤC LỤC & DANH SÁCH (Đánh số La Mã i, ii...) ----------------
+\pagenumbering{roman}
+
+% 1. Mục lục
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\renewcommand{\contentsname}{\centering\fontsize{16pt}{0pt}\selectfont\bfseries MỤC LỤC}
+\tableofcontents
+\thispagestyle{empty}
+\cleardoublepage
+
+% 2. Danh sách hình ảnh
+\phantomsection
+\renewcommand{\listfigurename}{\centering\fontsize{16pt}{0pt}\selectfont\bfseries DANH SÁCH HÌNH ẢNH}
+\addcontentsline{toc}{section}{DANH SÁCH HÌNH ẢNH}
+\listoffigures
+\thispagestyle{plain}
+\cleardoublepage
+
+% ---------------- PHẦN NỘI DUNG CHÍNH (Đánh số 1, 2, 3...) ----------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% Tiêu đề NỘI DUNG
+\begin{center}
+    {\fontsize{24pt}{0pt}\selectfont\bfseries NỘI DUNG}
+    \vspace{18pt}
+\end{center}
+
+\phantomsection
+\section{XÁC ĐỊNH BÀI TOÁN}
+
+
+Trong kỷ nguyên số hiện nay, nhu cầu kết nối tình cảm và tìm kiếm “nửa kia” của con người không hề giảm đi mà ngày càng trở nên cấp thiết. Tuy nhiên, một nghịch lý đang diễn ra: trong khi công nghệ giúp chúng ta dễ dàng tìm thấy nhau trên mạng xã hội hay các ứng dụng hẹn hò, thì kỹ năng giao tiếp thực tế và khả năng thấu hiểu cảm xúc (EQ) của giới trẻ lại đang gặp nhiều trở ngại.
+
+Rất nhiều bạn trẻ, đặc biệt là thế hệ Gen Z, cảm thấy thiếu tự tin, e ngại sự từ chối, hoặc đơn giản là không biết cách bắt đầu và duy trì một cuộc trò chuyện thú vị (thường được gọi là bị "nhạt"). Việc thiếu kinh nghiệm thực tế khiến họ lúng túng khi đối mặt với "crush" hoặc người khác giới, dẫn đến việc bỏ lỡ những cơ hội phát triển mối quan hệ tốt đẹp. Ngoài ra, việc tìm kiếm các tài liệu hướng dẫn kỹ năng hẹn hò bài bản, tâm lý và phù hợp với văn hóa hiện đại cũng không hề dễ dàng giữa một "rừng" thông tin trên internet.
+
+Bên cạnh đó, nhu cầu giải trí và tìm kiếm những dự đoán vui về tình yêu (như bói bài, cung hoàng đạo) luôn là một phần văn hóa tinh thần không thể thiếu, giúp người dùng giải tỏa căng thẳng và có thêm niềm tin vào các mối quan hệ.
+
+Để giải quyết các vấn đề trên, việc phát triển ứng dụng "RIZZ - Trợ lý Tình yêu AI" trở nên vô cùng cần thiết và hợp thời.
+
+Ứng dụng được tạo ra nhằm hướng tới đối tượng là những người trẻ đang muốn cải thiện kỹ năng giao tiếp, nâng cao chỉ số EQ và sự tự tin của bản thân trong chuyện tình cảm. Khác với các ứng dụng hẹn hò thông thường chỉ tập trung vào việc kết nối, ứng dụng RIZZ tập trung vào việc đào tạo và luyện tập.
+
+Thông qua việc tích hợp trí tuệ nhân tạo (AI) đóng vai "crush", người dùng có một môi trường an toàn để luyện tập hội thoại, thử nghiệm các tình huống giao tiếp mà không sợ bị đánh giá hay từ chối. Hệ thống tính điểm RIZZ và các tính năng gamification (như streak, bảng xếp hạng, đổi icon app) sẽ tạo động lực để người dùng kiên trì rèn luyện mỗi ngày. Đồng thời, kho tài liệu "bí kíp" và các tính năng bói vui sẽ mang lại trải nghiệm phong phú, vừa học vừa chơi.
+
+Tóm lại, ứng dụng không chỉ là một công cụ giải trí mà còn là một "người cố vấn" ảo, giúp người dùng chuyển hóa từ trạng thái e dè sang tự tin, từ đó nâng cao chất lượng đời sống tình cảm và các mối quan hệ xã hội.
+
+\cleardoublepage
+\phantomsection
+\section {PHÂN TÍCH YÊU CẦU NGƯỜI DÙNG}
+\setcounter{section}{2}
+
+\subsection{Yêu cầu chức năng}
+Hệ thống tập trung phục vụ đối tượng người dùng cá nhân có nhu cầu rèn luyện kỹ năng giao tiếp và giải trí. Các yêu cầu chức năng cụ thể bao gồm:
+
+\vspace{0.3cm} % Tạo khoảng cách nhỏ
+
+\noindent \textbf{Đối với quản lý tài khoản và Hồ sơ:}
+\begin{itemize}
+    \item Người dùng có thể đăng ký, đăng nhập.
+    \item Người dùng có thể thiết lập hồ sơ cá nhân đặc thù: lựa chọn giới tính của bản thân và thiết lập ``gu'' bạn gái/crush mong muốn để AI tối ưu hóa phản hồi.
+\end{itemize}
+
+\noindent \textbf{Đối với chức năng Luyện tập \& AI (Cốt lõi):}
+\begin{itemize}
+    \item Người dùng có thể trò chuyện trực tiếp với nhân vật AI (đóng vai Crush) để luyện hội thoại. AI có khả năng phản hồi cảm xúc và đánh giá mức độ ``mặn'' của người dùng.
+    \item Người dùng có thể tham gia giải quyết các tình huống giao tiếp khó xử do AI tạo ra để tích lũy kinh nghiệm.
+    \item Người dùng có thể chơi mini-game ``AI hay người thật'' để thử thách khả năng nhận biết và sự tinh tế trong giao tiếp.
+\end{itemize}
+
+\noindent \textbf{Đối với hệ thống RIZZ \& Gamification (Trò chơi hóa):}
+\begin{itemize}
+    \item Hệ thống tự động ghi nhận điểm danh hằng ngày (Streak) khi người dùng đăng nhập.
+    \item Người dùng có thể tích lũy điểm ``RIZZ'' thông qua các hoạt động: duy trì streak, xử lý tình huống thành công, chiến thắng mini-game.
+    \item Người dùng sử dụng điểm RIZZ để mở khóa các tài liệu, bí kíp tán gái độc quyền trong thư viện.
+    \item Người dùng có thể xem Bảng xếp hạng RIZZ để so sánh điểm số với bạn bè hoặc trên toàn thế giới.
+    \item Hệ thống cho phép thay đổi biểu tượng ứng dụng (App Icon) dựa trên thành tích học bài và chuỗi streak của người dùng.
+\end{itemize}
+
+\noindent \textbf{Đối với chức năng Xã hội \& Kết nối:}
+\begin{itemize}
+    \item Người dùng có thể chia sẻ những thành tựu hoặc tâm tư, trạng thái lên Bảng tin cho người khác xem.
+    \item Người dùng có thể tìm kiếm và kết bạn với người dùng khác.
+    \item Người dùng có thể nhắn tin trò chuyện, chia sẻ kinh nghiệm tán gái với bạn bè.
+\end{itemize}
+
+\noindent \textbf{Đối với chức năng Tiện ích \& Giải trí:}
+\begin{itemize}
+    \item Người dùng có thể sử dụng các công cụ bói vui về tình yêu: xem cung hoàng đạo, bói theo tên, tuổi, hoặc bói bài tây để giải trí.
+\end{itemize}
+\subsection{Yêu cầu phi chức năng}
+Để đảm bảo trải nghiệm người dùng tốt nhất, hệ thống cần đáp ứng các tiêu chuẩn sau:
+
+\begin{itemize}
+    \item \textbf{Giao diện:} Giao diện cần đơn giản, hiện đại, dễ sử dụng và có tính thẩm mỹ cao, phù hợp với thị hiếu của giới trẻ (Gen Z).
+    \item \textbf{Hiệu năng:} Hệ thống cần có thời gian phản hồi nhanh chóng, đặc biệt là trong các tác vụ phản hồi của AI (chat realtime) nhằm cung cấp trải nghiệm mượt mà nhất.
+    \item \textbf{Bảo mật:} Hệ thống phải đảm bảo bảo mật thông tin cá nhân của người dùng (bao gồm lịch sử chat, kết quả test EQ), ngăn chặn truy cập trái phép và tuân thủ các quy định về bảo vệ dữ liệu.
+    \item \textbf{Độ tin cậy:} Tính năng AI phải đảm bảo hoạt động ổn định, các phản hồi của AI cần có độ tự nhiên cao, hạn chế các câu trả lời vô nghĩa hoặc phản cảm.
+\end{itemize}
+
+\cleardoublepage
+
+
+\phantomsection
+\section{THIẾT KẾ HỆ THỐNG}
+\setcounter{section}{3}
+\subsection{Biểu đồ USE-CASE}
+
+\subsubsection{Xác định các tác nhân}
+Hệ thống có một tác nhân chính, bao gồm: Người dùng ứng dụng.
+
+\subsubsection{Nhóm Quản lý tài khoản (Authentication)}
+\begin{itemize}
+    \item \textbf{UC-01:} Đăng ký tài khoản
+    \item \textbf{UC-02:} Đăng nhập
+    \item \textbf{UC-03:} Thiết lập hồ sơ (Chọn Gu, Giới tính)
+\end{itemize}
+
+\subsubsection{Nhóm Mạng xã hội (Social)}
+\begin{itemize}
+    \item \textbf{UC-04:} Lướt bảng tin (Newsfeed)
+    \item \textbf{UC-05:} Tương tác bài viết (Like, Comment)
+    \item \textbf{UC-06:} Đăng bài viết mới
+    \item \textbf{UC-07:} Xem Profile người dùng khác
+    \item \textbf{UC-08:} Kết bạn
+    \item \textbf{UC-09:} Nhắn tin cá nhân (P2P)
+\end{itemize}
+
+\subsubsection{Nhóm Tương tác AI (AI Core)}
+\begin{itemize}
+    \item \textbf{UC-10:} Nhắn tin với AI Crush
+    \item \textbf{UC-11:} Xử lý tình huống giả lập
+    \item \textbf{UC-12:} Nhận phản hồi và đánh giá EQ
+\end{itemize}
+
+\subsubsection{Nhóm Hệ thống RIZZ (Gamification)}
+\begin{itemize}
+    \item \textbf{UC-13:} Điểm danh hàng ngày (Streak)
+    \item \textbf{UC-14:} Làm Quiz EQ / Tán tỉnh
+    \item \textbf{UC-15:} Chơi minigame "AI or Human"
+    \item \textbf{UC-16:} Đổi Icon ứng dụng
+    \item \textbf{UC-17:} Mở khóa tài liệu tán gái
+    \item \textbf{UC-18:} Bói tình yêu (Tarot)
+\end{itemize}
+
+\subsubsection{Biểu đồ use-case}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{use-cases-diagram/uc-all.png} % Thay usecase_rizz.png bằng tên file ảnh của bạn
+    \caption{Biểu đồ Use-case tổng quát của ứng dụng RIZZ}
+    \label{fig:. usecase_rizz}
+\end{figure}
+
+\cleardoublepage
+
+\subsection{Đặc tả use-case}
+
+% ==================================================================
+% NHÓM 1: XÁC THỰC (AUTHENTICATION)
+% ==================================================================
+\subsubsection{Nhóm quản lý tài khoản (Authentication)}
+
+% ==================================================================
+% UC-01: ĐĂNG KÝ
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-01} & \textbf{Đăng ký tài khoản (Signup)} \\
+\hline
+\textbf{Mô tả} & Cho phép người dùng mới tạo tài khoản, thiết lập thông tin cơ bản: tên hiển thị, email, mật khẩu. \\
+\hline
+\textbf{Tác nhân} & Người dùng chưa có tài khoản. \\
+\hline
+\textbf{Tiền điều kiện} & Thiết bị có kết nối internet. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Người dùng chọn nút ``Đăng ký ngay'' trên màn hình chào. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng nhập Tên hiển thị, Email, Mật khẩu và Nhập lại mật khẩu. \newline
+2. Hệ thống tạo tài khoản và chuyển vào trang Onboarding để thiết lập hồ sơ. \\
+\hline
+\textbf{Luồng ngoại lệ} & 
+- Email đã tồn tại: Hệ thống báo lỗi và yêu cầu đăng nhập. \newline
+- Nhập lại mật khẩu không khớp: Yêu cầu kiểm tra lại. \\
+\hline
+\textbf{Hậu điều kiện} & Tài khoản mới được tạo và lưu trong cơ sở dữ liệu. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-02: ĐĂNG NHẬP
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-02} & \textbf{Đăng nhập (Login)} \\
+\hline
+\textbf{Mô tả} & Người dùng truy cập vào ứng dụng bằng tài khoản đã đăng ký để sử dụng đầy đủ tính năng và tích lũy điểm RIZZ (Streak). \\
+\hline
+\textbf{Tác nhân} & Người dùng đã có tài khoản. \\
+\hline
+\textbf{Tiền điều kiện} & Tài khoản đã được kích hoạt. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Người dùng mở ứng dụng và chọn ``Đăng nhập''. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng nhập tên đăng nhập/email và mật khẩu. \newline
+2. Nhấn nút ``Đăng nhập''. \newline
+3. Hệ thống kiểm tra thông tin xác thực. \newline
+4. Nếu đúng, hệ thống hiển thị thông báo ``Đăng nhập thành công'' và cập nhật chuỗi Streak hằng ngày. \newline
+5. Chuyển hướng vào màn hình chính (Dashboard). \\
+\hline
+\textbf{Luồng ngoại lệ} & 
+- Sai mật khẩu/tên đăng nhập: Hệ thống báo lỗi và yêu cầu nhập lại. \\
+\hline
+\textbf{Hậu điều kiện} & Người dùng ở trạng thái đăng nhập, phiên làm việc được lưu. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-03: THIẾT LẬP HỒ SƠ
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-03} & \textbf{Thiết lập hồ sơ (Onboarding)} \\
+\hline
+\textbf{Mô tả} & Người dùng cung cấp thông tin cá nhân (giới tính) và thiết lập "Gu người yêu" để hệ thống AI cá nhân hóa nhân vật tương tác. \\
+\hline
+\textbf{Tác nhân} & Người dùng vừa đăng ký thành công. \\
+\hline
+\textbf{Tiền điều kiện} & Tài khoản vừa được tạo (UC-01) và đang ở trạng thái đăng nhập lần đầu. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Tự động kích hoạt sau khi Đăng ký thành công. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống hiển thị màn hình chào mừng và hỏi giới tính người dùng. \newline
+2. Người dùng chọn giới tính bản thân và giới tính của crush. \newline
+3. Hệ thống chuyển sang màn hình chọn "Tính cách mà bạn thích ở người khác" (Ví dụ: Hài hước, Lãng mạn, Thông minh, Gia trưởng...). \newline
+4. Hệ thống lưu cấu hình và khởi tạo nhân vật AI Crush tương ứng. \\
+\hline
+\textbf{Luồng ngoại lệ} & 
+- Mất kết nối mạng: Hệ thống cho phép thử lại (Retry). \\
+\hline
+\textbf{Hậu điều kiện} & Hồ sơ người dùng hoàn chỉnh, sẵn sàng sử dụng các tính năng chính. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% NHÓM 2: MẠNG XÃ HỘI (SOCIAL)
+% ==================================================================
+\subsubsection{Nhóm Mạng xã hội (Social)}
+
+% ==================================================================
+% UC-04: LƯỚT BẢNG TIN
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-04} & \textbf{Lướt bảng tin (View Newsfeed)} \\
+\hline
+\textbf{Mô tả} & Người dùng xem danh sách các bài đăng chia sẻ kinh nghiệm, câu hỏi từ cộng đồng hoặc bạn bè. \\
+\hline
+\textbf{Tác nhân} & Người dùng đã đăng nhập. \\
+\hline
+\textbf{Tiền điều kiện} & Đang ở màn hình chính. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Người dùng chọn tab "Social" trên thanh điều hướng. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống tải danh sách bài viết mới nhất từ server (gồm Avatar, Tên, Nội dung, Ảnh, Số like/comment). \newline
+2. Người dùng cuộn xuống để xem thêm các bài viết cũ hơn. \newline
+3. Người dùng có thể nhấn vào bài viết để xem chi tiết bình luận. \\
+\hline
+\textbf{Luồng ngoại lệ} & 
+- Danh sách trống: Hiển thị thông báo "Chưa có bài viết nào, hãy là người đầu tiên". \newline
+- Lỗi tải dữ liệu: Hiển thị Skeleton loading sau đó báo lỗi kết nối. \\
+\hline
+\textbf{Hậu điều kiện} & Danh sách bài viết được hiển thị. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-05: ĐĂNG BÀI VIẾT
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-05} & \textbf{Đăng bài viết mới (Create Post)} \\
+\hline
+\textbf{Mô tả} & Người dùng tạo nội dung mới (chia sẻ kinh nghiệm tán gái, hỏi đáp tình cảm) lên bảng tin chung. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Đang ở màn hình Social. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Nhấn nút dấu cộng (+) hoặc nút "Tạo bài viết". \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống hiển thị giao diện soạn thảo. \newline
+2. Người dùng nhập nội dung văn bản và đính kèm ảnh (nếu có). \newline
+3. Nhấn nút "Đăng". \newline
+4. Bài viết được lưu vào cơ sở dữ liệu và hiển thị lên đầu bảng tin. \\
+\hline
+\textbf{Luồng ngoại lệ} & 
+- Nội dung rỗng: Nút "Đăng" bị vô hiệu hóa (disable). \\
+\hline
+\textbf{Hậu điều kiện} & Bài viết mới xuất hiện công khai trên Newsfeed. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-06: TƯƠNG TÁC BÀI VIẾT
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-06} & \textbf{Tương tác bài viết (Like/Comment)} \\
+\hline
+\textbf{Mô tả} & Người dùng thể hiện cảm xúc (Tim) hoặc bình luận vào bài viết của người khác. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Đang xem bài viết trên Newsfeed hoặc xem chi tiết. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Nhấn vào icon Trái tim hoặc icon Bình luận. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. \textbf{Trường hợp Like:} Người dùng nhấn icon Trái tim. Hệ thống đổi màu icon sang đỏ, tăng bộ đếm Like lên 1. \newline
+2. \textbf{Trường hợp Comment:} Người dùng nhấn icon Bình luận, nhập nội dung và nhấn Gửi. Hệ thống hiển thị bình luận mới ngay lập tức. \newline
+3. Hệ thống gửi thông báo (Notification) đến chủ nhân bài viết. \\
+\hline
+\textbf{Luồng ngoại lệ} & 
+- Bỏ Like (Unlike): Nhấn lại vào icon Trái tim đang đỏ, hệ thống giảm bộ đếm Like đi 1. \\
+\hline
+\textbf{Hậu điều kiện} & Dữ liệu tương tác được cập nhật đồng bộ. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-07: XEM PROFILE NGƯỜI DÙNG KHÁC
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-07} & \textbf{Xem Profile người dùng khác} \\
+\hline
+\textbf{Mô tả} & Xem thông tin cá nhân, cấp độ RIZZ, danh hiệu và các bài đăng công khai của một người dùng khác. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Đang ở màn hình Social hoặc Bảng xếp hạng. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Nhấn vào Avatar hoặc tên của người dùng khác. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống hiển thị trang cá nhân của người được chọn (Avatar, Tên, Bio, Điểm RIZZ). \newline
+2. Hệ thống kiểm tra trạng thái bạn bè để hiển thị nút chức năng phù hợp (Kết bạn/Nhắn tin). \newline
+3. Hệ thống tải danh sách các bài viết công khai của người đó bên dưới. \\
+\hline
+\textbf{Hậu điều kiện} & Không có thay đổi dữ liệu. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-08: KẾT BẠN
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-08} & \textbf{Kết bạn (Add Friend)} \\
+\hline
+\textbf{Mô tả} & Gửi lời mời kết bạn để mở rộng mạng lưới xã hội và nhắn tin riêng. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Đang xem Profile (UC-07) và hai người chưa là bạn bè. \\
+\hline
+\textbf{Sự kiện kích hoạt} & Nhấn nút ``Kết bạn'' hoặc ``Thêm bạn bè''. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng nhấn nút ``Kết bạn''. \newline
+2. Hệ thống gửi thông báo yêu cầu kết bạn đến người nhận. \newline
+3. Nút chức năng chuyển trạng thái thành ``Đã gửi lời mời''. \newline
+4. Khi người kia chấp nhận, hệ thống thông báo ``Đã trở thành bạn bè''. \\
+\hline
+\textbf{Hậu điều kiện} & Yêu cầu kết bạn được lưu vào Database. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-09: NHẮN TIN CÁ NHÂN (P2P)
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-09} & \textbf{Nhắn tin cá nhân (P2P Chat)} \\
+\hline
+\textbf{Mô tả} & Trò chuyện riêng tư với bạn bè (người thật) để chia sẻ kinh nghiệm. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Hai người dùng đã là bạn bè (hoàn thành UC-08). \\
+\hline
+\textbf{Sự kiện kích hoạt} & Chọn người dùng trong danh sách bạn bè và nhấn ``Nhắn tin''. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống mở giao diện chat Real-time. \newline
+2. Người dùng nhập tin nhắn, gửi ảnh/sticker. \newline
+3. Hệ thống chuyển tin nhắn đến người nhận ngay lập tức (thông qua Socket). \newline
+4. Hệ thống hiển thị trạng thái ``Đã xem'' khi người nhận mở tin nhắn. \\
+\hline
+\textbf{Hậu điều kiện} & Nội dung hội thoại được lưu trữ. \\
+\hline
+\end{longtable}
+
+\subsubsection{Nhóm Tương tác AI (AI Core)}
+
+% ==================================================================
+% UC-10: NHẮN TIN VỚI AI CRUSH
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-10} & \textbf{Nhắn tin với AI Crush} \\
+\hline
+\textbf{Mô tả} & Trò chuyện với nhân vật ảo được cá nhân hóa để luyện tập khả năng phản xạ và tán tỉnh. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Đã tạo hồ sơ và chọn Gu (UC-03). \\
+\hline
+\textbf{Sự kiện kích hoạt} & Chọn tab ``Chat'' -> ``AI Crush''. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng gửi tin nhắn. \newline
+2. AI phân tích nội dung và ngữ cảnh. \newline
+3. AI phản hồi lại kèm theo biểu cảm (Emotion) thay đổi theo độ hài lòng. \newline
+4. Hệ thống hiển thị thanh ``Độ thân mật'' tăng hoặc giảm dựa trên nội dung chat. \\
+\hline
+\textbf{Hậu điều kiện} & Lịch sử chat và chỉ số thân mật được cập nhật. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-11: XỬ LÝ TÌNH HUỐNG GIẢ LẬP
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-11} & \textbf{Xử lý tình huống giả lập} \\
+\hline
+\textbf{Mô tả} & Người dùng tham gia giải quyết các kịch bản khó (drama, giận dỗi) do AI tạo ra. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Vào mục Explore -> Chọn ``Tình huống''. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống hiển thị bối cảnh (Ví dụ: Bạn quên ngày kỷ niệm). \newline
+2. Hệ thống đưa ra các lựa chọn ứng xử (A, B, C, D). \newline
+3. Người dùng chọn một phương án. \newline
+4. Chuyển sang UC-12 để đánh giá kết quả. \\
+\hline
+\textbf{Hậu điều kiện} & Ghi nhận lựa chọn của người dùng. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-12: NHẬN PHẢN HỒI VÀ ĐÁNH GIÁ EQ
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-12} & \textbf{Nhận phản hồi và đánh giá EQ} \\
+\hline
+\textbf{Mô tả} & Hệ thống AI phân tích hành động/lời nói của người dùng và đưa ra lời khuyên cải thiện. \\
+\hline
+\textbf{Tác nhân} & Hệ thống AI. \\
+\hline
+\textbf{Tiền điều kiện} & Sau khi hoàn thành UC-11 hoặc một đoạn chat dài ở UC-10. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống hiển thị kết quả: ``High RIZZ'' (Tốt) hoặc ``Low RIZZ'' (Kém). \newline
+2. AI giải thích lý do tại sao lựa chọn đó đúng/sai về mặt tâm lý học. \newline
+3. Hệ thống cộng/trừ điểm RIZZ tương ứng. \newline
+4. Cập nhật chỉ số EQ trong hồ sơ người dùng. \\
+\hline
+\textbf{Hậu điều kiện} & Chỉ số EQ và điểm RIZZ thay đổi. \\
+\hline
+\end{longtable}
+
+\subsubsection{Nhóm Hệ thống RIZZ (Gamification)}
+
+% ==================================================================
+% UC-13: ĐIỂM DANH HÀNG NGÀY
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-13} & \textbf{Điểm danh hàng ngày (Streak)} \\
+\hline
+\textbf{Mô tả} & Hệ thống tự động ghi nhận chuỗi ngày đăng nhập liên tiếp để thưởng điểm. \\
+\hline
+\textbf{Tác nhân} & Hệ thống (Tự động). \\
+\hline
+\textbf{Tiền điều kiện} & Đăng nhập lần đầu trong ngày. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Kiểm tra ngày đăng nhập cuối cùng. \newline
+2. Nếu là ngày liền kề: Tăng Streak +1. \newline
+3. Nếu ngắt quãng > 24h: Reset Streak về 1. \newline
+4. Hiển thị popup thông báo số ngày Streak và điểm thưởng nhận được. \\
+\hline
+\textbf{Hậu điều kiện} & Cập nhật số ngày Streak. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-14: LÀM QUIZ EQ / TÁN TỈNH
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-14} & \textbf{Làm Quiz EQ / Tán tỉnh} \\
+\hline
+\textbf{Mô tả} & Trả lời bộ câu hỏi trắc nghiệm tâm lý để kiểm tra kiến thức và kiếm điểm. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Vào mục Explore -> Quiz. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng chọn bộ câu hỏi (VD: Test độ tinh tế). \newline
+2. Hệ thống lần lượt hiện từng câu hỏi và 4 đáp án. \newline
+3. Người dùng chọn đáp án và nộp bài. \newline
+4. Hệ thống chấm điểm, hiển thị xếp loại (A, B, C) và cộng điểm RIZZ thưởng. \\
+\hline
+\textbf{Hậu điều kiện} & Lưu lịch sử làm bài và điểm số. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-15: CHƠI MINIGAME "AI OR HUMAN"
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-15} & \textbf{Chơi minigame ``AI or Human''} \\
+\hline
+\textbf{Mô tả} & Chat ẩn danh và đoán xem đối phương là người hay máy. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Hệ thống ghép cặp ngẫu nhiên (với Bot hoặc User khác). \newline
+2. Chat trong 60 giây. \newline
+3. Hết giờ, người dùng chọn đáp án: ``AI'' hoặc ``Người''. \newline
+4. Hệ thống công bố kết quả và trao thưởng nếu đoán đúng. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-16: ĐỔI ICON ỨNG DỤNG
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-16} & \textbf{Đổi Icon ứng dụng} \\
+\hline
+\textbf{Mô tả} & Cho phép người dùng thay đổi biểu tượng App trên màn hình chính điện thoại dựa trên cấp độ Streak. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Đạt đủ mốc Streak quy định (7 ngày, 30 ngày...). \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng vào Profile -> Cài đặt -> Đổi Icon. \newline
+2. Hệ thống hiển thị danh sách Icon (Có khóa và Đã mở khóa). \newline
+3. Người dùng chọn Icon đã mở khóa. \newline
+4. Hệ thống thực hiện thay đổi Icon (sử dụng tính năng `activity-alias` của Android). \\
+\hline
+\textbf{Hậu điều kiện} & Icon ứng dụng trên màn hình Home thay đổi. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-17: MỞ KHÓA TÀI LIỆU TÁN GÁI
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-17} & \textbf{Mở khóa tài liệu tán gái} \\
+\hline
+\textbf{Mô tả} & Dùng điểm RIZZ để mua quyền truy cập vào các bài viết/bí kíp độc quyền. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Có đủ điểm RIZZ tích lũy. \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng xem danh sách tài liệu bị khóa. \newline
+2. Chọn tài liệu muốn xem -> Nhấn ``Mở khóa (500 RIZZ)''. \newline
+3. Hệ thống trừ điểm và hiển thị nội dung tài liệu. \newline
+4. Tài liệu được lưu vào mục ``Đã sở hữu''. \\
+\hline
+\textbf{Hậu điều kiện} & Điểm RIZZ giảm, quyền truy cập tài liệu được cấp vĩnh viễn. \\
+\hline
+\end{longtable}
+
+% ==================================================================
+% UC-18: BÓI TÌNH YÊU (TAROT)
+% ==================================================================
+\begin{longtable}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{UC-18} & \textbf{Bói tình yêu (Tarot)} \\
+\hline
+\textbf{Mô tả} & Tính năng giải trí, bói bài Tarot hoặc cung hoàng đạo về chuyện tình cảm hàng ngày. \\
+\hline
+\textbf{Tác nhân} & Người dùng. \\
+\hline
+\textbf{Tiền điều kiện} & Mỗi ngày được xem miễn phí 1 lần (hoặc trả phí RIZZ). \\
+\hline
+\textbf{Luồng cơ bản} & 
+1. Người dùng chọn mục Bói tình yêu. \newline
+2. Hệ thống hiển thị bộ bài úp. \newline
+3. Người dùng chọn 1 lá bài. \newline
+4. Hệ thống lật bài và hiển thị lời giải thích (Meaning) về tình duyên trong ngày. \\
+\hline
+\textbf{Hậu điều kiện} & Ghi nhận lượt xem trong ngày. \\
+\hline
+\end{longtable}
+\clearpage
+
+\subsection{Biểu đồ trình tự}
+% =================================================================
+% 1. ĐĂNG KÝ & THIẾT LẬP HỒ SƠ
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng đăng ký tài khoản}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/signup.png}
+    \caption{Biểu đồ trình tự ca người dùng đăng ký và thiết lập hồ sơ}
+    \label{fig:signup}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase (Auth \& Firestore) \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng nhập thông tin đăng ký. App gọi API `createUser` của Firebase Auth. \newline
+2. Firebase kiểm tra và tạo tài khoản nếu email hợp lệ. \newline
+3. Sau khi tạo tài khoản, App chuyển sang màn hình Onboarding (chọn Gu người yêu). \newline
+4. App gọi lệnh `setDoc` lưu thông tin Profile và cấu hình AI vào Firestore. \newline
+5. Hoàn tất đăng ký, chuyển vào màn hình chính. \\
+\hline
+\end{tabular}
+\vspace{1cm}
+
+% =================================================================
+% 2. ĐĂNG NHẬP & ĐIỂM DANH (STREAK)
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng đăng nhập}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/login.png}
+    \caption{Biểu đồ trình tự ca người dùng đăng nhập và điểm danh}
+    \label{fig:login}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase (Auth \& Firestore) \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng đăng nhập. App gửi xác thực lên Firebase Auth. \newline
+2. Nếu đúng, Firebase trả về Token. App tiếp tục truy vấn Firestore lấy ngày đăng nhập cuối (`lastLogin`). \newline
+3. App tính toán logic Streak: Nếu đăng nhập liên tiếp thì +1, nếu ngắt quãng thì reset về 1. \newline
+4. App cập nhật Streak mới lên Firestore và hiển thị thông báo chào mừng. \\
+\hline
+\end{tabular}
+\clearpage
+% =================================================================
+% 3. NEWSFEED & ĐĂNG BÀI
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng lướt Newsfeed và đăng bài}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/newfeeds.png}
+    \caption{Biểu đồ trình tự ca người dùng lướt Newsfeed và đăng bài}
+    \label{fig:newfeeds}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase (Firestore, Storage) \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng truy cập màn hình Newsfeed. Ứng dụng gọi API lấy dữ liệu từ collection `posts` trên Firestore. \newline
+2. Firebase trả về danh sách bài viết để hiển thị. \newline
+3. Khi đăng bài mới kèm ảnh: Ứng dụng upload ảnh lên Firebase Storage trước để lấy URL. \newline
+4. Sau đó, ứng dụng lưu nội dung bài viết kèm URL ảnh vào Firestore. \newline
+5. Giao diện cập nhật bài viết mới lên đầu bảng tin. \\
+\hline
+\end{tabular}
+\vspace{1cm}
+
+% =================================================================
+% 4. TƯƠNG TÁC (LIKE/COMMENT)
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng tương tác bài viết}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/likecommentpost.png}
+    \caption{Biểu đồ trình tự ca người dùng tương tác bài viết}
+    \label{fig:likecomment}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase (Firestore, Functions) \\
+\hline
+\textbf{Mô tả} & 
+1. \textbf{Like:} Người dùng nhấn Like. App cập nhật giao diện ngay lập tức (Optimistic UI) và gửi lệnh update lên Firestore. \newline
+2. \textbf{Comment:} Người dùng gửi bình luận. App thêm document mới vào sub-collection `comments`. \newline
+3. \textbf{Thông báo:} Các hành động trên kích hoạt Firebase Cloud Functions chạy ngầm để gửi thông báo (Push Notification) đến thiết bị của chủ bài viết. \\
+\hline
+\end{tabular}
+\vspace{1cm}
+
+% =================================================================
+% 5. KẾT BẠN
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng kết bạn}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/addfriend.png}
+    \caption{Biểu đồ trình tự ca người dùng gửi lời mời và kết bạn}
+    \label{fig:addfriend}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User A, User B, Mobile App, Firebase \\
+\hline
+\textbf{Mô tả} & 
+1. User A gửi lời mời: App tạo document trong `friend\_requests` với trạng thái `pending`. \newline
+2. User B chấp nhận: App cập nhật trạng thái thành `accepted`. \newline
+3. Hệ thống tự động cập nhật ID của cả hai vào danh sách bạn bè của nhau thông qua Cloud Triggers. \newline
+4. Gửi thông báo thành công cho cả hai phía. \\
+\hline
+\end{tabular}
+\clearpage % Ngắt trang cho đẹp
+
+% =================================================================
+% 6. NHẮN TIN P2P
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng nhắn tin bạn bè (P2P)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/message.png}
+    \caption{Biểu đồ trình tự ca người dùng nhắn tin cá nhân}
+    \label{fig:message}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase (Realtime/Firestore) \\
+\hline
+\textbf{Mô tả} & 
+1. App sử dụng cơ chế lắng nghe (`onSnapshot`) để duy trì kết nối thời gian thực với cuộc trò chuyện. \newline
+2. Người gửi nhập tin nhắn, App đẩy dữ liệu lên Firestore. \newline
+3. Nhờ kết nối Socket, tin nhắn ngay lập tức xuất hiện trên thiết bị của người nhận mà không cần tải lại trang. \\
+\hline
+\end{tabular}
+\vspace{1cm}
+
+% =================================================================
+% 7. CHAT AI & ĐÁNH GIÁ EQ
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng nhắn tin với AI (Core)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/ai-chat.png}
+    \caption{Biểu đồ trình tự ca người dùng nhắn tin với AI và nhận điểm EQ}
+    \label{fig:aichat}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, App, Firebase Functions, AI Engine \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng gửi tin nhắn. App gọi Firebase Cloud Function để bảo mật API Key. \newline
+2. Function chuyển tiếp tin nhắn kèm ngữ cảnh (Context) sang AI Engine. \newline
+3. AI phân tích và trả về câu trả lời + chấm điểm EQ (RIZZ Score). \newline
+4. Firebase lưu lịch sử chat, cộng điểm thưởng vào Database và trả kết quả về App hiển thị. \\
+\hline
+\end{tabular}
+\vspace{1cm}
+
+% =================================================================
+% 8. MINIGAME AI OR HUMAN
+% =================================================================
+\subsubsection{Biểu đồ trình tự Minigame AI or Human}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/aiorhuman.png}
+    \caption{Biểu đồ trình tự Minigame phân biệt AI và Người thật}
+    \label{fig:aiorhuman}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, App, Firebase (Matchmaking) \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng tham gia hàng đợi ghép cặp (`queue`). \newline
+2. Hệ thống ngẫu nhiên ghép User với một User khác hoặc một Bot AI. \newline
+3. Sau 60s chat, người dùng chọn đáp án dự đoán (AI hay Người). \newline
+4. Server kiểm tra đáp án, nếu đúng sẽ cộng điểm RIZZ thưởng vào tài khoản. \\
+\hline
+\end{tabular}
+\clearpage
+
+% =================================================================
+% 9. MỞ KHÓA TÀI LIỆU
+% =================================================================
+\subsubsection{Biểu đồ trình tự ca người dùng mở khóa tài liệu}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/unlock-document.png}
+    \caption{Biểu đồ trình tự ca người dùng dùng điểm Rizz mở khóa tài liệu}
+    \label{fig:unlockdoc}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase Firestore \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng yêu cầu mở khóa tài liệu Premium. \newline
+2. App thực hiện giao dịch (Transaction) lên Firestore. \newline
+3. Hệ thống kiểm tra số dư RIZZ. Nếu đủ, trừ điểm và thêm ID tài liệu vào danh sách sở hữu (`unlockedDocs`). \newline
+4. Trả về thành công và hiển thị nội dung tài liệu. \\
+\hline
+\end{tabular}
+\vspace{1cm}
+
+% =================================================================
+% 10. BÓI TAROT
+% =================================================================
+\subsubsection{Biểu đồ trình tự chức năng Bói bài Tarot}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{sequence-diagram/tarot.png}
+    \caption{Biểu đồ trình tự chức năng Bói bài Tarot tình yêu}
+    \label{fig:tarot}
+\end{figure}
+
+\noindent
+\begin{tabular}{|p{0.3\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Đối tượng tham gia} & User, Mobile App, Firebase Functions \\
+\hline
+\textbf{Mô tả} & 
+1. Người dùng chọn bói bài. App gọi `Callable Function` để đảm bảo logic server-side. \newline
+2. Hệ thống kiểm tra lượt bói miễn phí trong ngày (Quota). \newline
+3. Nếu hợp lệ, hệ thống random 1 lá bài, lưu log giao dịch và trả về kết quả (Hình ảnh + Ý nghĩa). \newline
+4. App hiển thị hiệu ứng lật bài cho người dùng xem. \\
+\hline
+\end{tabular}
+
+\subsection{Cơ sở dữ liệu}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/591663813_1234788628480505_4588037735041375174_n.png}
+    \caption{Database}
+    \label{fig:placeholder}
+\end{figure}
+\subsection{Đặc tả API}
+
+% ---------------------------------------------------------
+% NHÓM 1: AUTH & USER
+% ---------------------------------------------------------
+\subsubsection{Nhóm Quản lý Tài khoản (Auth)}
+
+% --- Function 1: Đăng ký ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{auth/register} \\
+\hline
+\textbf{Mô tả} & Đăng ký tài khoản mới, khởi tạo dữ liệu User trong Firestore và thiết lập cấu hình ban đầu. \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{email}: String, Email đăng ký hợp lệ. \newline
+- \texttt{password}: String, Mật khẩu người dùng. \newline
+- \texttt{displayName}: String, Tên hiển thị. \newline
+- \texttt{preference}: Object, Cấu hình Gu bạn gái (VD: \{type: "CUTE"\}). \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{uid}: String, User ID duy nhất từ Firebase. \newline
+- \texttt{status}: String, Trạng thái ("SUCCESS"). \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm} % Khoảng cách giữa các bảng
+
+% --- Function 2: Cập nhật Profile ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{user/updateProfile} \\
+\hline
+\textbf{Mô tả} & Cập nhật thông tin cá nhân của người dùng. \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{avatarUrl} (Tùy chọn): String, Link ảnh đại diện mới. \newline
+- \texttt{bio} (Tùy chọn): String, Dòng giới thiệu bản thân. \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{updatedAt}: Timestamp, Thời gian cập nhật thành công. \\
+\hline
+\end{longtable}
+
+% ---------------------------------------------------------
+% NHÓM 2: AI CORE
+% ---------------------------------------------------------
+\subsubsection{Nhóm Tương tác AI (AI Core)}
+
+% --- Function 3: Chat AI ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{ai/sendMessage} \\
+\hline
+\textbf{Mô tả} & Gửi tin nhắn đến AI. Lưu lịch sử chat. \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{conversationId}: String, ID cuộc hội thoại. \newline
+- \texttt{content}: String, Nội dung tin nhắn người dùng nhập. \newline
+- \texttt{messageType}: String, Loại tin (TEXT hoặc IMAGE). \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{replyContent}: String, Câu trả lời của AI. \newline
+- \texttt{emotion}: String, Trạng thái cảm xúc (HAPPY, ANGRY...). \newline
+- \texttt{earnedRizz}: Integer, Điểm thưởng nhận được. \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+% --- Function 4: Chấm điểm tình huống ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{ai/analyzeScenario} \\
+\hline
+\textbf{Mô tả} & Chấm điểm lựa chọn của người dùng trong các tình huống giả lập (Drama). \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{scenarioId}: String, ID tình huống đang chơi. \newline
+- \texttt{choiceId}: String, ID đáp án người dùng chọn. \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{isCorrect}: Boolean, Kết quả Đúng/Sai. \newline
+- \texttt{explanation}: String, Giải thích lý do từ chuyên gia tâm lý. \newline
+- \texttt{bonusPoints}: Integer, Điểm cộng/trừ. \\
+\hline
+\end{longtable}
+
+% ---------------------------------------------------------
+% NHÓM 3: MẠNG XÃ HỘI
+% ---------------------------------------------------------
+\subsubsection{Nhóm Mạng xã hội (Social)}
+
+% --- Function 5: Tạo bài viết ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{social/createPost} \\
+\hline
+\textbf{Mô tả} & Đăng bài viết mới lên bảng tin. \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{content}: String, Nội dung văn bản (Max 500 ký tự). \newline
+- \texttt{imageUrls}: Array<String>, Danh sách đường dẫn ảnh. \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{postId}: String, ID bài viết vừa tạo. \newline
+- \texttt{status}: String, Trạng thái ("APPROVED" hoặc "REJECTED"). \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+% --- Function 6: Lấy Newsfeed ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{social/getNewsfeed} \\
+\hline
+\textbf{Mô tả} & Lấy danh sách bài viết có phân trang (Pagination). \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{lastPostId} (Tùy chọn): String, ID bài cuối của trang trước. \newline
+- \texttt{limit}: Integer, Số lượng bài muốn lấy (VD: 10). \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{posts}: Array, Danh sách đối tượng bài viết chi tiết. \newline
+- \texttt{hasMore}: Boolean, Còn dữ liệu để tải tiếp hay không. \\
+\hline
+\end{longtable}
+
+% ---------------------------------------------------------
+% NHÓM 4: HỆ THỐNG RIZZ
+% ---------------------------------------------------------
+\subsubsection{Nhóm Hệ thống RIZZ (Gamification)}
+
+% --- Function 7: Check Streak ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{rizz/checkStreak} \\
+\hline
+\textbf{Mô tả} & Kiểm tra chuỗi đăng nhập hàng ngày và cộng điểm thưởng. \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{clientTimezone}: String, Múi giờ (VD: "Asia/Ho\_Chi\_Minh") để tính ngày chính xác. \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{currentStreak}: Integer, Số ngày chuỗi hiện tại. \newline
+- \texttt{status}: String, "STREAK\_INCREASED" hoặc "STREAK\_RESET". \newline
+- \texttt{pointsAdded}: Integer, Số điểm vừa được cộng. \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+% --- Function 8: Đổi quà ---
+\begin{longtable}{|p{3.5cm}|p{12cm}|}
+\hline
+\textbf{Tên Function} & \textbf{rizz/redeemItem} \\
+\hline
+\textbf{Mô tả} & Sử dụng điểm RIZZ để đổi lấy vật phẩm (Icon, Tài liệu). \\
+\hline
+\textbf{Yêu cầu (Input)} & Body (JSON): \newline
+- \texttt{itemId}: String, Mã định danh vật phẩm (VD: "icon\_vip\_1"). \\
+\hline
+\textbf{Phản hồi (Output)} & JSON: \newline
+- \texttt{success}: Boolean, Trạng thái giao dịch. \newline
+- \texttt{remainingPoints}: Integer, Số dư điểm RIZZ còn lại. \newline
+- \texttt{error}: String (Tùy chọn), Lý do lỗi nếu thất bại. \\
+\hline
+\end{longtable}
+
+\end{document}
+
+
+
